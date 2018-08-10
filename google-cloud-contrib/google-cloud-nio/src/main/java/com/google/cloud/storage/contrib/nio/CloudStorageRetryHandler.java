@@ -21,6 +21,7 @@ import com.google.cloud.storage.StorageException;
 import java.io.EOFException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import javax.net.ssl.SSLException;
 
 /**
@@ -147,7 +148,7 @@ public class CloudStorageRetryHandler {
     // Yes one wouldn't necessarily think of 403 as retriable,
     // but see https://github.com/broadinstitute/gatk/issues/3735
     // for reports of 403 being returned in cases when retrying works.
-    return exs.isRetryable() || exs.getCode() == 403 || exs.getCode() == 500 || exs.getCode() == 503;
+    return exs.isRetryable() || exs.getCode() == 403 || exs.getCode() == 500 || exs.getCode() == 502 || exs.getCode() == 503;
   }
 
   /**
@@ -157,14 +158,15 @@ public class CloudStorageRetryHandler {
   static boolean isReopenable(final StorageException exs) {
     Throwable throwable = exs;
     // ensures finite iteration
-    int maxDepth = 10;
+    int maxDepth = 20;
     while (throwable != null && maxDepth-- > 0) {
       if ((throwable.getMessage() != null
           && throwable.getMessage().contains("Connection closed prematurely"))
           || throwable instanceof SSLException
           || throwable instanceof EOFException
           || throwable instanceof SocketException
-          || throwable instanceof SocketTimeoutException) {
+          || throwable instanceof SocketTimeoutException
+          || throwable instanceof UnknownHostException) {
         return true;
       }
       throwable = throwable.getCause();
