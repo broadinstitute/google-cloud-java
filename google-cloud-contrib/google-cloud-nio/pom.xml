@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.broadinstitute</groupId>
   <artifactId>google-cloud-nio-GATK4-custom-patch</artifactId>
-  <version>0.20.4-alpha-GCS-RETRY-FIX</version>
+  <version>0.20.5-alpha-GCS-RETRY-FIX</version>
   <packaging>jar</packaging>
   <name>Google Cloud NIO</name>
   <url>https://github.com/GoogleCloudPlatform/google-cloud-java/tree/master/google-cloud-contrib/google-cloud-nio</url>
