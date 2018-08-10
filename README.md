@@ -1,9 +1,31 @@
-### This is a fork to work around https://github.com/GoogleCloudPlatform/google-cloud-java/issues/2453
+### This is a bug fix fork to work around a specific issue
+
+This is a fork of https://github.com/GoogleCloudPlatform/google-cloud-java built upon a version not affected by the bug 
+described in https://github.com/GoogleCloudPlatform/google-cloud-java/issues/2453, and with various retry-related patches 
+applied to the `google-cloud-nio` package that are needed by downstream projects such as https://github.com/broadinstitute/gatk.
 
 In order to build and publish the **google-cloud-nio** artifact to central:
+
+add the following to your `~/.m2/settings.xml`
+
+```
+ <settings>
+    <servers>
+       <server>
+          <id>sonatype-nexus-staging</id>
+          <username>your-user</username>
+          <password>your-password</password>
+       </server>
+    </servers>
+ </settings>
+```
+
+Then: 
+
 ```
  cd google-cloud-contrib/google-cloud-nio/
  mvn clean deploy -Dcheckstyle.skip=true  -DskipTests
+ 
 ```
 
 ==========================
