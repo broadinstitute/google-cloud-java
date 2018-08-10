@@ -1,3 +1,13 @@
+### This is a fork to work around https://github.com/GoogleCloudPlatform/google-cloud-java/issues/2453
+
+In order to build and publish the **google-cloud-nio** artifact to central:
+```
+ cd google-cloud-contrib/google-cloud-nio/
+ mvn clean deploy -Dcheckstyle.skip=true  -DskipTests
+```
+
+==========================
+
 Google Cloud Client Library for Java
 ==========================
 
